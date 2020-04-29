@@ -10,9 +10,11 @@ import com.online.bookstore.model.customer.Address;
 import com.online.bookstore.model.customer.Customer;
 import com.online.bookstore.model.order.Order;
 import com.online.bookstore.model.order.OrderDetail;
+import com.online.bookstore.model.order.Payment;
 import com.online.bookstore.model.product.Book;
 import com.online.bookstore.model.product.Product;
 import com.online.bookstore.model.service.CustomerService;
+import com.online.bookstore.model.order.Payment;
 
 public class BookStoreClient {
 			
@@ -29,6 +31,7 @@ public class BookStoreClient {
 			customer.setFirstName("Michael");
 	        customer.setLastName("Gerard");
 	        customer.setCustomerId("AY2345");
+	        
 	        
 	        //Spring to inject the right object implementation in Customer object for BillingAddress using Setter Injection
 	        Address billingAddress = customer.getBillingAddress();
@@ -50,6 +53,7 @@ public class BookStoreClient {
 	        
 	        //order detail contains products ordered
 	        OrderDetail orderDetail1 = (OrderDetail) context.getBean("orderDetail");
+	        
 	        //First product
 	        Book product1 = orderDetail1.getBook(); 
 	        product1.setId("BF-7898");
@@ -58,11 +62,13 @@ public class BookStoreClient {
 	        product1.setAuthor("Folwer, Martin");
 	        product1.setPrice(50.99);
 	        orderDetail1.setQuantity(1);
+	        
 	        //Add product to order
 	        order1.addProduct(orderDetail1);
 	        
 	        //Second order detail
 	        OrderDetail orderDetail2 = (OrderDetail) context.getBean("orderDetail");
+	        
 	        //Second product
 	        Book product2 = orderDetail2.getBook();
 	        product2.setId("BF-2345");
@@ -71,8 +77,17 @@ public class BookStoreClient {
 	        product2.setAuthor("Shklar, Leon");
 	        product2.setPrice(45.99);
 	        orderDetail2.setQuantity(1);
+	        
 	        //Add product to order
 	        order1.addProduct(orderDetail2);
+	        
+	        //Payment Info
+	        Payment payment1 = (Payment) context.getBean("payment");
+	        payment1.setCardName("John Smith");
+	        payment1.setCardNumber(12345);
+	        payment1.setExpMonth(04);
+	        payment1.setExpYear(21);
+	        payment1.setSecurityCode(000);
 	        
 	        //finish order	        
 	        order1.confirmOrder();
@@ -95,6 +110,7 @@ public class BookStoreClient {
 	        	// Format order output
 	        	System.out.println("\n\t" +"+++++++++++++++++++++++++++++++++");
 	        	System.out.println("\tOrder Id: \t\t" + order.getOrderId() + "\n");
+	        	System.out.println("\tCard Used: \t\t" + payment1.getCardNumber() + "\n");
 	        	System.out.println("\tOrder status: \t\t" + order.getOrderState() + "\n");
 
 	        	System.out.println("\tOrder Items: ");

@@ -13,9 +13,11 @@
 	<bean id="shippingAddress" class="com.online.bookstore.model.customer.AddressImpl" scope="prototype"/>
 	<bean id="book" class="com.online.bookstore.model.product.Book" scope="prototype"/>
 
-	<bean id="orderDetail" class="com.online.bookstore.model.order.OrderDetailImpl" scope="prototype">
+	<bean id="orderDetail"
+		class="com.online.bookstore.model.order.OrderDetailImpl"
+		scope="prototype">
 		<property name="book" ref="book" />
-		<property name="quantity" >
+		<property name="quantity">
 			<value>0</value>
 		</property>
 	</bean>
@@ -48,5 +50,6 @@
 	<bean id="customerService" class="com.online.bookstore.model.service.CustomerService" scope="prototype">
 		<property name="customer" ref="customer" />
 	</bean>
-	
+	<bean id="payment" class="com.online.bookstore.model.order.PaymentImpl" scope="prototype"></bean>
+
 </beans>
